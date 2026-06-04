@@ -52,7 +52,7 @@
 		</repository>
 		<repository>
 			<id>github</id>
-			<url>https://maven.pkg.github.com/read424/avro-schemas</url>
+			<url>https://maven.pkg.github.com/devs-tlm/tlm-schema-registry</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
