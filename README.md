@@ -42,6 +42,47 @@ Para ejecutar la aplicación localmente utilizando el perfil de desarrollo y con
 mvn clean install spring-boot:run -Dspring-boot.run.profiles=dev -Dmaven.test.skip=true
 ```
 
+## Agregar un Nuevo Módulo
+
+Cuando agregue un nuevo módulo al monolito, debe completar dos pasos obligatorios:
+
+### 1. Registrar el módulo en el Dockerfile
+
+Edite el `Dockerfile` y agregue el nuevo módulo en la sección de construcción de Maven. Ejemplo:
+
+```dockerfile
+RUN mvn clean package -pl module-core,module-almacen,module-nuevo -am -DskipTests
+```
+
+### 2. Registrar en la tabla de módulos del Gateway
+
+El gateway es **dinámico** y obtiene su configuración de rutas desde la tabla `gateway.tb_modules`. Cree una migration en `gateway/src/main/resources/db/migration/` con el siguiente patrón:
+
+```sql
+-- V[VERSION]__add_module_[nombre].sql
+INSERT INTO gateway.tb_modules (
+    module_name,
+    uri,
+    path,
+    strip_prefix_count,
+    status,
+    is_pattern
+) VALUES (
+    'module-nuevo',
+    'http://localhost:8088',
+    '\/api\/v2\/module-nuevo(\/.*)?',
+    2,
+    'ACTIVE',
+    true
+);
+```
+
+**Importante**: 
+- `path` debe usar patrón compatible con regex si `is_pattern = true`
+- `strip_prefix_count` define cuántos segmentos remover del path antes de enrutarlo
+- `status` debe ser `'ACTIVE'` para que el gateway enrute las solicitudes
+- `uri` debe apuntar al host/puerto donde corre el módulo
+
 ## Características Recientes
 - **Sistema de Pesaje**: Integración con balanzas digitales vía Raspberry Pi para el registro automático de peso en rollos de tela, con notificaciones en tiempo real al frontend.
 - **Arquitectura Reactiva**: Implementación completa de stacks no bloqueantes para alta escalabilidad.
