@@ -91,7 +91,7 @@
 	</repositories>
 	<dependencyManagement>
 		<dependencies>
-			<!-- BOM de Spring Boot -->
+			<!-- BOM de Spring Boot 05-06-2026 -->
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
