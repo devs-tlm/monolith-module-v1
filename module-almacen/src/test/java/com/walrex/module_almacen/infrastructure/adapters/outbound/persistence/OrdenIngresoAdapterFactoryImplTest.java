@@ -21,11 +21,14 @@ public class OrdenIngresoAdapterFactoryImplTest {
     @Mock
     private OrdenIngresoLogisticaPort ordenIngresoTransformacionAdapter;
 
+    @Mock
+    private OrdenIngresoLogisticaPort ajusteInventarioAdapter;
+
     private OrdenIngresoAdapterFactoryImpl factory;
 
     @BeforeEach
     void setUp() {
-        factory = new OrdenIngresoAdapterFactoryImpl(ordenIngresoLogisticaAdapter, ordenIngresoTelaCrudaAdapter, ordenIngresoTransformacionAdapter);
+        factory = new OrdenIngresoAdapterFactoryImpl(ordenIngresoLogisticaAdapter, ordenIngresoTelaCrudaAdapter, ordenIngresoTransformacionAdapter, ajusteInventarioAdapter);
     }
 
     @Test

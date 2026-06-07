@@ -12,15 +12,18 @@ public class OrdenIngresoAdapterFactoryImpl implements OrdenIngresoAdapterFactor
     private final OrdenIngresoLogisticaPort ordenIngresoLogisticaAdapter;
     private final OrdenIngresoLogisticaPort ordenIngresoTelaCrudaAdapter;
     private final OrdenIngresoLogisticaPort ordenIngresoTransformacionAdapter;
+    private final OrdenIngresoLogisticaPort ajusteInventarioAdapter;
 
     public OrdenIngresoAdapterFactoryImpl(
             OrdenIngresoLogisticaPort ordenIngresoLogisticaAdapter,
             @Qualifier("telaCruda") OrdenIngresoLogisticaPort ordenIngresoTelaCrudaAdapter,
-            @Qualifier("Ingresotransformacion") OrdenIngresoLogisticaPort ordenIngresoTransformacionAdapter
+            @Qualifier("Ingresotransformacion") OrdenIngresoLogisticaPort ordenIngresoTransformacionAdapter,
+            @Qualifier("ajusteInventario") OrdenIngresoLogisticaPort ajusteInventarioAdapter
     ){
         this.ordenIngresoLogisticaAdapter=ordenIngresoLogisticaAdapter;
         this.ordenIngresoTelaCrudaAdapter=ordenIngresoTelaCrudaAdapter;
         this.ordenIngresoTransformacionAdapter=ordenIngresoTransformacionAdapter;
+        this.ajusteInventarioAdapter=ajusteInventarioAdapter;
     }
 
     @Override
@@ -35,6 +38,8 @@ public class OrdenIngresoAdapterFactoryImpl implements OrdenIngresoAdapterFactor
                 return Mono.just(ordenIngresoTelaCrudaAdapter);
             case TRANSFORMACION:
                 return Mono.just(ordenIngresoTransformacionAdapter);
+            case AJUSTE_INVENTARIO:
+                return Mono.just(ajusteInventarioAdapter);
             case LOGISTICA_GENERAL:
             default:
                 return Mono.just(ordenIngresoLogisticaAdapter);

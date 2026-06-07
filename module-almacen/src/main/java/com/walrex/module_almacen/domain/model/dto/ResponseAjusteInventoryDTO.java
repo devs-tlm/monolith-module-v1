@@ -10,9 +10,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResponseAjusteInventoryDTO {
-    private boolean isSuccess;
-    private String message;
     private String transactionId;
+    private String message;
     private ResultAjustIngresoDTO result_ingresos;
     private ResultAjustEgresoDTO result_egresos;
+
+    public boolean isSuccess() {
+        return message != null && !message.isEmpty();
+    }
 }

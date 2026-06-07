@@ -17,6 +17,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 @Slf4j
 public class RouterAlmacenReactiveAPI {
         private final OrdenIngresoLogisticaHandler ordenIngresoHandler;
+        private final AjusteInventarioHandler ajusteInventarioHandler;
         private final TransformacionInsumosHandler transformacionInsumosHandler;
         private final ApproveDeliveryHandler approveDeliveryHandler;
         private final KardexHandler kardexHandler;
@@ -37,6 +38,9 @@ public class RouterAlmacenReactiveAPI {
                                                 .POST("/ingreso-logistica",
                                                                 RequestPredicates.accept(MediaType.APPLICATION_JSON),
                                                                 ordenIngresoHandler::nuevoIngresoLogistica)
+                                                .POST("/ajuste-inventario",
+                                                                RequestPredicates.accept(MediaType.APPLICATION_JSON),
+                                                                ajusteInventarioHandler::crearAjuste)
                                                 .POST("/transformacion",
                                                                 RequestPredicates.accept(MediaType.APPLICATION_JSON),
                                                                 transformacionInsumosHandler::crearConversion)

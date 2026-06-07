@@ -28,7 +28,6 @@ public class AgregarOrdenIngresoLogisticaService implements CrearOrdenIngresoUse
     }
 
     private TipoOrdenIngreso determinarTipoOrden(OrdenIngreso ordenIngreso) {
-        // Lógica para determinar el tipo de orden basado en sus propiedades
         // Si tiene rollos, es tela cruda
         if (tieneDetallesConRollos(ordenIngreso)) {
             return TipoOrdenIngreso.TELA_CRUDA;

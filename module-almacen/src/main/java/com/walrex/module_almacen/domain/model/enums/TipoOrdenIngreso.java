@@ -4,6 +4,7 @@ public enum TipoOrdenIngreso {
     LOGISTICA_GENERAL,
     TELA_CRUDA,
     TRANSFORMACION,
-    OTRO_TIPO// Otros tipos que puedas necesitar en el futuro
+    AJUSTE_INVENTARIO,
+    OTRO_TIPO
     ;
 }
