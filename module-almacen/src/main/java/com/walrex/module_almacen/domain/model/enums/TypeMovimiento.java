@@ -2,8 +2,9 @@ package com.walrex.module_almacen.domain.model.enums;
 
 public enum TypeMovimiento {
     INGRESO_LOGISTICA(1),
-    INTERNO_TRANSFORMACION(3),
-    APROBACION_SALIDA_REQUERIMIENTO(2);
+    APROBACION_SALIDA_REQUERIMIENTO(2),
+    AJUSTE_INVENTARIO(3),
+    INTERNO_TRANSFORMACION(4);
 
     private final int id;
 
