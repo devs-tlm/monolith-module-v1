@@ -87,6 +87,28 @@ public class IngresoPersistenceAdapterConfig {
     }
 
     @Bean
+    @Qualifier("ajusteInventario")
+    public OrdenIngresoLogisticaPort ajusteInventarioAdapter(
+            OrdenIngresoRepository ordenIngresoRepository,
+            ArticuloAlmacenRepository articuloRepository,
+            DetailsIngresoRepository detalleRepository,
+            OrdenIngresoEntityMapper mapper,
+            ArticuloIngresoLogisticaMapper articuloIngresoLogisticaMapper,
+            DetalleInventoryRespository detalleInventoryRespository,
+            KardexRepository kardexRepository) {
+
+        return AjusteInventarioPersistenceAdapter.builder()
+                .ordenIngresoRepository(ordenIngresoRepository)
+                .articuloRepository(articuloRepository)
+                .detalleRepository(detalleRepository)
+                .mapper(mapper)
+                .articuloIngresoLogisticaMapper(articuloIngresoLogisticaMapper)
+                .detalleInventoryRespository(detalleInventoryRespository)
+                .kardexRepository(kardexRepository)
+                .build();
+    }
+
+    @Bean
     @Qualifier("ingresoMovimiento")
     public OrdenIngresoLogisticaPort movimientoIngresoAdapter(
             OrdenIngresoRepository ordenIngresoRepository,
@@ -114,12 +136,14 @@ public class IngresoPersistenceAdapterConfig {
     public OrdenIngresoAdapterFactory ordenIngresoAdapterFactory(
             OrdenIngresoLogisticaPort ordenIngresoLogisticaAdapter,
             @Qualifier("telaCruda") OrdenIngresoLogisticaPort ordenIngresoTelaCrudaAdapter,
-            @Qualifier("Ingresotransformacion") OrdenIngresoLogisticaPort ordenIngresoTransformacionAdapter) {
+            @Qualifier("Ingresotransformacion") OrdenIngresoLogisticaPort ordenIngresoTransformacionAdapter,
+            @Qualifier("ajusteInventario") OrdenIngresoLogisticaPort ajusteInventarioAdapter) {
 
         return new OrdenIngresoAdapterFactoryImpl(
                 ordenIngresoLogisticaAdapter,
                 ordenIngresoTelaCrudaAdapter,
-                ordenIngresoTransformacionAdapter
+                ordenIngresoTransformacionAdapter,
+                ajusteInventarioAdapter
         );
     }
 }
